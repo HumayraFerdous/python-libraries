@@ -1,0 +1,42 @@
+import numpy as np
+import pandas as pd
+String_data = pd.Series(['aardvark', 'artichoke', np.nan, 'avocado'])
+print(String_data)
+clean_value = String_data.isnull()
+print(clean_value)
+#Filtering out missing data
+clean_value2 = String_data.dropna()
+print(clean_value2)
+data = pd.DataFrame([[1., 6.5, 3.], [1., np.nan, np.nan],
+                     [np.nan, np.nan, np.nan], [np.nan, 6.5, 3.]])
+cleaned = data.dropna()
+print(cleaned)
+df = pd.DataFrame(np.random.randn(7, 3))
+df.iloc[:4, 1] = np.nan
+print(df)
+df2 = df.fillna({1:0.5})
+print(df2)
+#Removing duplicates
+data = pd.DataFrame({'k1':['one','two','one','two','one','two','two'],
+                    'k2':[1,1,2,3,3,4,4]})
+data2 = data.duplicated()
+print(data2)
+data3 = data.drop_duplicates()
+print(data3)
+#Transforming data
+data = pd.DataFrame({'food':['khichuri','Kabab','noodles',
+                     'nuggets','beef vuna','noodles','Pasta'],
+                     'kg':[4,1,5,7,3,6,1]})
+print(data)
+elements = {
+    'khichuri':'daal',
+    'Kabab': 'cow',
+    'nuggets':'chicken',
+    'beef vuna':'cow',
+    'noodles':'wheat',
+    'Pasta':'wheat'
+}
+item = data['food']
+data['element'] = item.map(elements)
+print(data)
+
